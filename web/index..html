@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>vijualizer</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+	<link rel="stylesheet" href="stylesheet.css" type="text/css">
+</head>
+<body>
+	<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script src="jquery.knob.min.js"></script>
+	<script src="jquery.mousewheel.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script>
+		$(function() {
+			$(".dial").knob();
+		});
+	</script>
+
+	<img src="vijualizer.png" width="20%" height="20%" id="logo"/>
+
+	<div id="canvas">
+		<!-- <input type="text" value="75" class="dial" data-angleArc=250 data-angleOffset=-125 data-displayPrevious=true> -->
+	</div>
+
+
+
+	<!-- <input type="text" value="75" class="dial"> -->
+	<div id="componentSelector">
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs nav-justified" role="tablist">
+			<li role="presentation" class="active"><a href="#filter" aria-controls="filter" role="tab" data-toggle="tab">Filter</a></li>
+			<li role="presentation"><a href="#gates" aria-controls="gates" role="tab" data-toggle="tab">Gates</a></li>
+			<li role="presentation"><a href="#visualizer" aria-controls="visualizer" role="tab" data-toggle="tab">Visualizer</a></li>
+			<li role="presentation"><a href="#other" aria-controls="other" role="tab" data-toggle="tab">Other</a></li>
+		</ul>
+
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane fade in active" id="filter">
+				<div class="flex-container" id="filter-container"></div>
+			</div>
+			<div role="tabpanel" class="tab-pane fade" id="gates">
+				<div class="flex-container" id="gates-container"></div>
+			</div>
+
+			<div role="tabpanel" class="tab-pane fade" id="visualizer">
+				<div class="flex-container" id="visualizer-container"></div>
+			</div>
+			<div role="tabpanel" class="tab-pane fade" id="other">
+				<div class="flex-container" id="other-container"></div>
+			</div>
+		</div>
+	</div>
+
+		<script src="main.js"></script>
+
+</body>
+</html>

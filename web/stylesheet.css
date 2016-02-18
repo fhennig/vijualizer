@@ -1,0 +1,37 @@
+#componentSelector {
+	position:absolute;
+	bottom:0%;
+	width: 100%;
+	background-color: #fff;
+}
+
+#tab-pane {
+	height: 20%;
+}
+
+.flex-container {
+	display: -webkit-flex;
+	display: flex;
+	overflow-x: scroll;
+	/*justify-content: center;*/
+}
+
+.flex-item {
+	width: 150px;
+	height: 150px;
+	margin: 10px;
+}
+
+#canvas {
+	position:absolute;
+	top: 10%;
+	width: 100%;
+	height: 100%;
+	background-color: #212121;
+}
+
+#logo {
+	position: relative;
+	height: 20%;
+	width: 20%;
+}
