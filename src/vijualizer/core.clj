@@ -26,9 +26,11 @@
 (defn init-line []
   "Initializes Minim and an InputLine"
   (let [frame-size 1024
+        sample-rate 44100
         minim (Minim. MinimDummyInput)
-        input (.getLineIn minim Minim/MONO, frame-size)]
-    {:frame-size frame-size
+        input (.getLineIn minim Minim/MONO frame-size sample-rate)]
+    {:sample-rate sample-rate
+     :frame-size frame-size
      :minim minim
      :input input}))
 
@@ -58,7 +60,7 @@
 
 
 (defn update-state [state args]
-  (let [fft (FFT. (:frame-size args) 44100.0)]
+  (let [fft (FFT. (:frame-size args) (:sample-rate args))]
     (.logAverages fft 45 15)
     (a/go (while (not (:stop @state))
             (.forward fft (.-mix (:input args)))
@@ -112,18 +114,29 @@
 
 ;;; waveform
 
-(defn draw-waveform [a]
-  (q/background 1.0)
-  (defn scale [y] (-> y (* 200) (+ 200)))
+#_(defn cache-ys [a]
   (defn get-y [i] (-> (:input a) .-mix (.get i)))
-  (doseq [i (-> (:frame-size a) dec range)]
-    (q/line i (scale (get-y i))
-            (inc i) (scale (get-y (inc i))))))
+  (doall (map get-y (range (:frame-size a)))))
+
+
+(defn draw-waveform [a]
+  (q/background 0.5)
+  (q/text (str [(q/width) (q/height)]) 0 0 500 500)
+  (let [get-y (fn [i] (-> (:input a) .-mix (.get i)))
+        hh (/ (q/height) 2)
+        scale-x (fn [x] (-> x (/ (:frame-size a))
+                            (* (q/width))))
+        scale-y (fn [y] (-> y (* hh) (+ hh)))]
+    (doseq [i (-> (:frame-size a) dec range)
+            :let [j (inc i)]]
+      (q/line (scale-x i) (scale-y (get-y i))
+              (scale-x j) (scale-y (get-y j))))))
 
 
 (defn plot-waveform [a]
   (q/sketch
-   :size [1024 400]
+   :size [500 500]
+;   :size :fullscreen
    :setup quil-setup
    :update identity
    :draw (fn [_] (draw-waveform a))
